@@ -1,8 +1,10 @@
-FROM --platform=linux/arm64 debian:bullseye
+FROM --platform=linux/arm64 debian:bookworm
 
-ADD https://go.dev/dl/go1.20.10.linux-arm64.tar.gz .
+ARG GO_VERSION=1.22.1
+
+ADD https://go.dev/dl/go${GO_VERSION}.linux-arm64.tar.gz .
 # install go
-RUN tar -C /usr/local -xzf go1.20.10.linux-arm64.tar.gz && rm go1.20.10.linux-arm64.tar.gz
+RUN tar -C /usr/local -xzf go${GO_VERSION}.linux-arm64.tar.gz && rm go${GO_VERSION}.linux-arm64.tar.gz
 
 ENV PATH="$PATH:/usr/local/go/bin"
 
