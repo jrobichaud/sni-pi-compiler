@@ -1,4 +1,4 @@
-FROM --platform=linux/arm64 debian:bookworm
+FROM --platform=${BUILDPLATFORM} debian:bookworm
 
 ARG GO_VERSION=1.22.1
 
@@ -13,7 +13,7 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 WORKDIR /sni
-
+SHELL ["/bin/bash", "-c"]
 CMD CGO_ENABLED=1 GOOS=linux GOARCH=arm64 CC="aarch64-linux-gnu-gcc" go build \
     -tags="notray" \
     -gcflags=all=-l \
